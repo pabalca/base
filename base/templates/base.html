@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>
+    {% block title %}Secrets{% endblock %}
+    </title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css' ) }}">
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js' ) }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js' ) }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.slim.min.js' ) }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js' ) }}"></script>
+    <script src="{{url_for('static', filename='qrcode.min.js')}}"></script>
+</head>
+<body>
+
+<div class="container bg-light">
+    <nav class="navbar navbar-default navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{{ url_for('index') }}">
+            <img src="{{ url_for('static', filename='plus.svg' ) }}" width="30" height="30" alt="">
+            Secrets
+        </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">friends</a>
+            </li>
+        </ul>
+<small><a title="{{ session.get('user')}}" href="{{ url_for('logout') }}">( logout )</a></small>
+    </div>
+</nav>
+<hr>
+<main>
+    {% for message in get_flashed_messages() %}
+    <div class="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+
+{% block content %}{% endblock %}
+
+</main>
+
+<footer class="page-footer font-small blue pt-4">
+    <div class="container-fluid text-center text-md-left">
+        <small><p>&copy; 2022 by Pablo Alcala</p></small><br>
+    </div>
+</footer>
+</div>
+{% block scripts %}{% endblock %}
+</body>
+</html>

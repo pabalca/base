@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Secrets{% endblock %}
+
+{% block content %}
+
+<form method="post">
+  {{ form.hidden_tag() }}
+  <div class="form-row align-items-center">
+    <div class="col-auto">{{ form['text'](class='form-control mb-2', placeholder="Secret") }}</div>
+    <div class="col-auto">{{ form['submit'](class='btn btn-success mb-2') }}</div>
+  </div>
+</form>
+<hr>
+
+<div class="list-group">
+  {% for secret in secrets %}
+  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{ secret.text }}</h5>
+      <small>{{ secret.created_at.strftime('%Y/%m/%d %H:%M') }}</small>
+    </div>
+  {% endfor %}
+  </a>
+</div>
+
+{% endblock %}
